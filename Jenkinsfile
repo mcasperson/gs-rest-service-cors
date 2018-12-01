@@ -23,8 +23,8 @@ pipeline {
                 success {
                     dir('complete') {
                         junit 'target/surefire-reports/**/*.xml'
-                        archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-                        archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+                        archiveArtifacts artifacts: 'target/*.jar', fingerprint: true, allowEmptyArchive: true
+                        archiveArtifacts artifacts: 'target/*.war', fingerprint: true, allowEmptyArchive: true
                     }
                 }
             }
