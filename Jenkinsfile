@@ -29,5 +29,31 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy - Staging') {
+                    steps {
+                        withCredentials([string(credentialsId: 'TomcatPassword', variable: 'TomcatPassword'),
+                                string(credentialsId: 'TomcatUsername', variable: 'TomcatUsername'),
+                                string(credentialsId: 'TomcatUrlStaging', variable: 'TomcatUrl')]) {
+                            TOMCAT_USERNAME=$(TomcatUsername} TOMCAT_PASSWORD=${TomcatPassword} TOMCAT_URL=${TomcatUrlStaging} mvn tomcat7:deploy
+                        }
+                    }
+                }
+
+        stage('Sanity check') {
+            steps {
+                input "Does the staging environment look ok?"
+            }
+        }
+
+        stage('Deploy - Production') {
+            steps {
+                withCredentials([string(credentialsId: 'TomcatPassword', variable: 'TomcatPassword'),
+                        string(credentialsId: 'TomcatUsername', variable: 'TomcatUsername'),
+                        string(credentialsId: 'TomcatUrlProduction', variable: 'TomcatUrl')]) {
+                    TOMCAT_USERNAME=$(TomcatUsername} TOMCAT_PASSWORD=${TomcatPassword} TOMCAT_URL=${TomcatUrlProduction} mvn tomcat7:deploy
+                }
+            }
+        }
     }
 }
