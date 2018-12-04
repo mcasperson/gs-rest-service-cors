@@ -57,7 +57,7 @@ pipeline {
                         string(credentialsId: 'TomcatUrlProduction', variable: 'TomcatUrl')]) {
                     dir('complete') {
                         sh '''
-                            TOMCAT_USERNAME=${TomcatUsername} TOMCAT_PASSWORD=${TomcatPassword} TOMCAT_URL=${TomcatUrlProduction} mvn tomcat7:deploy
+                            TOMCAT_USERNAME=${TomcatUsername} TOMCAT_PASSWORD=${TomcatPassword} TOMCAT_URL=${TomcatUrl} mvn tomcat7:deploy
                         '''
                     }
                 }
