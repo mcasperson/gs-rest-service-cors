@@ -28,7 +28,7 @@ public class GreetingIntegrationTests {
         RequestEntity.get(uri("/greeting")).header(HttpHeaders.ORIGIN, "http://localhost:9000").build(),
         Greeting.class);
     assertEquals(HttpStatus.OK, entity.getStatusCode());
-    assertEquals("http://localhost:9000", entity.getHeaders().getAccessControlAllowOrigin());
+    assertEquals("*", entity.getHeaders().getAccessControlAllowOrigin());
     Greeting greeting = entity.getBody();
     assertEquals("Hello, World!", greeting.getContent());
   }
@@ -39,7 +39,7 @@ public class GreetingIntegrationTests {
         RequestEntity.get(uri("/greeting-javaconfig")).header(HttpHeaders.ORIGIN, "http://localhost:9000").build(),
         Greeting.class);
     assertEquals(HttpStatus.OK, entity.getStatusCode());
-    assertEquals("http://localhost:9000", entity.getHeaders().getAccessControlAllowOrigin());
+    assertEquals("*", entity.getHeaders().getAccessControlAllowOrigin());
     Greeting greeting = entity.getBody();
     assertEquals("Hello, World!", greeting.getContent());
   }
