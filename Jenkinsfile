@@ -35,9 +35,11 @@ pipeline {
                         withCredentials([string(credentialsId: 'TomcatPassword', variable: 'TomcatPassword'),
                                 string(credentialsId: 'TomcatUsername', variable: 'TomcatUsername'),
                                 string(credentialsId: 'TomcatUrlStaging', variable: 'TomcatUrl')]) {
-                            sh '''
-                                TOMCAT_USERNAME=${TomcatUsername} TOMCAT_PASSWORD=${TomcatPassword} TOMCAT_URL=${TomcatUrlStaging} mvn tomcat7:deploy
-                            '''
+                            dir('complete') {
+                                sh '''
+                                    TOMCAT_USERNAME=${TomcatUsername} TOMCAT_PASSWORD=${TomcatPassword} TOMCAT_URL=${TomcatUrlStaging} mvn tomcat7:deploy
+                                '''
+                            }
                         }
                     }
                 }
@@ -53,9 +55,11 @@ pipeline {
                 withCredentials([string(credentialsId: 'TomcatPassword', variable: 'TomcatPassword'),
                         string(credentialsId: 'TomcatUsername', variable: 'TomcatUsername'),
                         string(credentialsId: 'TomcatUrlProduction', variable: 'TomcatUrl')]) {
-                    sh '''
-                        TOMCAT_USERNAME=${TomcatUsername} TOMCAT_PASSWORD=${TomcatPassword} TOMCAT_URL=${TomcatUrlProduction} mvn tomcat7:deploy
-                    '''
+                    dir('complete') {
+                        sh '''
+                            TOMCAT_USERNAME=${TomcatUsername} TOMCAT_PASSWORD=${TomcatPassword} TOMCAT_URL=${TomcatUrlProduction} mvn tomcat7:deploy
+                        '''
+                    }
                 }
             }
         }
