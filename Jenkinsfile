@@ -37,7 +37,7 @@ pipeline {
                                 string(credentialsId: 'TomcatUrlStaging', variable: 'TomcatUrl')]) {
                             dir('complete') {
                                 sh '''
-                                    TOMCAT_USERNAME=${TomcatUsername} TOMCAT_PASSWORD=${TomcatPassword} TOMCAT_URL=${TomcatUrlStaging} mvn tomcat7:deploy
+                                    TOMCAT_USERNAME=${TomcatUsername} TOMCAT_PASSWORD=${TomcatPassword} TOMCAT_URL=${TomcatUrl} mvn tomcat7:deploy
                                 '''
                             }
                         }
